@@ -1,0 +1,50 @@
+<meta name="viewport" content="width=device-width"/>
+
+<style>
+  body{background:#202020}
+  canvas{background:#ffffff}
+</style>
+
+<canvas id="canvas"></canvas>
+
+<script> window.L = console.log </script>
+<script>
+  
+  let c = canvas.getContext('2d');
+  let x = 50;
+  let isDrag = false;
+  
+  function redraw() {
+    c.clearRect(0, 0, c.canvas.width, c.canvas.height);
+    c.fillRect(x, 50, 10, 10);
+  }
+  
+  redraw();
+  
+  window.addEventListener('mousedown', handler);
+  window.addEventListener('mouseup', handler);
+  window.addEventListener('mousemove', handler);
+  
+  function handler(e) {
+    
+    switch (e.type) {
+      case 'mousedown':
+        isDrag = true;
+        L('dragging..')
+        break;
+      case 'mouseup':
+        isDrag = false;
+        L('released..')
+        break;
+      case 'mousemove':
+        if (isDrag) {
+          x = e.clientX;
+        }
+        break;
+    }
+    
+    redraw();
+  }
+  
+  
+</script>
